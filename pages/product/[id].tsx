@@ -7,6 +7,7 @@ import ProductImage from '../../components/ProductImage';
 const Container = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   padding: 12px;
   font-family: 'Roboto', sans-serif;
