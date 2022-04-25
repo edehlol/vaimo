@@ -16,6 +16,8 @@ interface BadgeProps {
 const Badge = styled.div<BadgeProps>`
   color: ${(props) => (props.primary ? 'white' : '#ff6600')};
   background-color: ${(props) => (props.primary ? '#ff6600' : '#fff0e6;')};
+  background-image: ${(props) =>
+    props.primary && 'linear-gradient(270deg, #f5515f 0%, #ff7527 100%)'};
   padding: 2px 8px;
   font-size: 12px;
   line-height: 16px;

@@ -5,6 +5,8 @@ import RatingsBox from './RatingsBox';
 import PriceBox from './PriceBox';
 import MarchExpo from './MarchExpo';
 import Countdown from './Countdown';
+import Products from './Products';
+import Assurance from './Assurance';
 
 const ProductName = styled.h1`
   font-size: 16px;
@@ -35,6 +37,8 @@ export default function InfoBox() {
       <PriceBox />
       <MarchExpo />
       <Countdown />
+      <Products />
+      <Assurance />
     </div>
   );
 }

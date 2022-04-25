@@ -10,6 +10,7 @@ const Container = styled.div`
   flex-direction: column;
   padding: 12px;
   font-family: 'Roboto', sans-serif;
+  font-size: 14px;
   color: #333333;
 
   @media ${device.desktop} {
