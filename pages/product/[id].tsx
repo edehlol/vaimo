@@ -16,6 +16,7 @@ const Container = styled.div`
 
   @media ${device.desktop} {
     flex-direction: row;
+    column-gap: 24px;
   }
 `;
 

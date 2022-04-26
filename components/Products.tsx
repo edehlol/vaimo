@@ -58,7 +58,7 @@ const Quantity = () => {
       <IconContainer minus>
         <Image src="/icons/minus.png" width="14px" height="2px" alt="minus" />
       </IconContainer>
-      <Input value={0} />
+      <Input defaultValue={0} />
       <IconContainer plus>
         <Image src="/icons/plus.png" width="14px" height="14px" alt="minus" />
       </IconContainer>

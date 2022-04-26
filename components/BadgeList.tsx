@@ -21,6 +21,10 @@ const Badge = styled.div<BadgeProps>`
   padding: 2px 8px;
   font-size: 12px;
   line-height: 16px;
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  font-weight: ${(props) => props.primary && '500'};
 `;
 const BadgeIcon = ({ src }: { src: string }) => {
   return <Image src={src} width="12px" height="12px" alt="Ok Icon" />;

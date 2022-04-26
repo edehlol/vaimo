@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styled from 'styled-components';
+import Text from './Text';
 
 const Container = styled.div`
   display: flex;
@@ -9,21 +10,15 @@ const Container = styled.div`
   column-gap: 24px;
 `;
 
-const Discount = styled.span`
-  color: #ff6600;
-`;
-const Text = styled.span`
-  color: #999999;
-  display: flex;
-  column-gap: 12px;
-`;
-
 export default function Countdown() {
   return (
     <Container>
-      <Discount>20% OFF</Discount>
-      <Text>Discount ends in</Text>
-      <Text>
+      <Text color="orange">20% OFF</Text>
+      <Text color="gray">Discount ends in</Text>
+      <Text
+        color="gray"
+        style={{ display: 'flex', columnGap: '12px', alignItems: 'center', fontStyle: 'italic' }}
+      >
         <Image src="/icons/clock.png" width="16px" height="16px" alt="clock" />
         2d:01h:56m:49s
       </Text>

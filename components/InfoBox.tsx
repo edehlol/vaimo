@@ -8,6 +8,10 @@ import Countdown from './Countdown';
 import Products from './Products';
 import Assurance from './Assurance';
 
+const Container = styled.div`
+  max-width: 526px;
+`;
+
 const ProductName = styled.h1`
   font-size: 16px;
   line-height: 24px;
@@ -22,11 +26,12 @@ const Tag = styled.span`
   padding: 2px 8px;
   border-radius: 2px;
   height: 20px;
+  float: right;
 `;
 
 export default function InfoBox() {
   return (
-    <div>
+    <Container>
       <BadgeList />
       <ProductName>
         2021 hot selling GPS 5G quadcopter drone with camera remote control aircraft drone WiFi mini
@@ -39,6 +44,6 @@ export default function InfoBox() {
       <Countdown />
       <Products />
       <Assurance />
-    </div>
+    </Container>
   );
 }

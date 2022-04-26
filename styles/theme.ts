@@ -7,6 +7,7 @@ const theme: DefaultTheme = {
     main: 'cyan',
     secondary: 'magenta',
     gray: '#999999',
+    orange: '#FF6600',
   },
 };
 

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styled from 'styled-components';
+import Text from './Text';
 
 const Container = styled.div`
   display: flex;
@@ -15,21 +16,9 @@ const AssuranceContainer = styled.div`
   column-gap: 5px;
 `;
 
-const BoldText = styled.span`
-  font-size: 14px;
-  font-weight: bold;
-  color: #999999;
-`;
-const Text = styled.span`
-  font-size: 12px;
-  color: #999999;
-`;
-
 const PaymentContainer = styled.div`
   display: flex;
   column-gap: 4px;
-  color: #999999;
-  font-size: 12px;
 `;
 const CardsContainer = styled.div`
   display: flex;
@@ -46,11 +35,18 @@ export default function Assurance() {
       <AssuranceContainer>
         <Image src="/icons/assurance.svg" width="12px" height="14px" alt="security lock" />
         <div>
-          <BoldText>Trade Assurance</BoldText> <Text>protects your Alibaba.com orders</Text>
+          <Text weight="bold" color="gray">
+            Trade Assurance
+          </Text>{' '}
+          <Text color="gray" size="small">
+            protects your Alibaba.com orders
+          </Text>
         </div>
       </AssuranceContainer>
       <PaymentContainer>
-        <span>Payments: </span>
+        <Text size="small" color="gray">
+          Payments:{' '}
+        </Text>
         <CardsContainer>
           <Image src="/icons/visa.svg" width="17px" height="12px" alt="visa" />
           <Image src="/icons/mastercard.svg" width="17px" height="12px" alt="mastercard" />
@@ -59,8 +55,12 @@ export default function Assurance() {
       </PaymentContainer>
 
       <LinksContainer>
-        <Text>Alibaba.com Logistics</Text>
-        <Text>Inspection Solutions</Text>
+        <Text size="small" color="gray">
+          Alibaba.com Logistics
+        </Text>
+        <Text size="small" color="gray">
+          Inspection Solutions
+        </Text>
       </LinksContainer>
     </Container>
   );
