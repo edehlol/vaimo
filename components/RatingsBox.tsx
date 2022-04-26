@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styled from 'styled-components';
+import Product from '../Product';
 import Text from './Text';
 
 const Container = styled.div`
@@ -12,7 +13,13 @@ const Container = styled.div`
 
 const Star = () => <Image src="/icons/star.png" width="14px" height="14px" alt="star rating" />;
 
-export default function RatingsBox() {
+export default function RatingsBox({
+  rating,
+  count,
+}: {
+  rating: Product['reviews']['rating'];
+  count: Product['reviews']['count'];
+}) {
   return (
     <Container>
       <div>
@@ -24,10 +31,10 @@ export default function RatingsBox() {
       </div>
 
       <Text size="small" color="orange">
-        5.0
+        {rating}
       </Text>
       <Text size="small" color="gray">
-        7 reviews
+        {count} reviews
       </Text>
       <Text size="small" style={{ marginLeft: '24px' }}>
         19 buyers

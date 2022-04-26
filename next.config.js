@@ -4,6 +4,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    domains: ['fe-assignment.vaimo.net'],
+  },
 };
 
 module.exports = nextConfig;

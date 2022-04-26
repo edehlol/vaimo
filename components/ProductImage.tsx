@@ -15,10 +15,10 @@ const ImageContainer = styled.div`
   }
 `;
 
-export default function ProductImage() {
+export default function ProductImage({ src }: { src: string }) {
   return (
     <ImageContainer>
-      <Image src="/image.jpg" layout="fill" objectFit="contain" alt="product image" />
+      <Image src={src} layout="fill" objectFit="contain" alt="product image" />
     </ImageContainer>
   );
 }

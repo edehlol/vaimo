@@ -1,8 +1,10 @@
+import { GetStaticProps } from 'next';
 import styled from 'styled-components';
 import device from '../../breakpoints';
 import AddToBox from '../../components/AddToBox';
 import InfoBox from '../../components/InfoBox';
 import ProductImage from '../../components/ProductImage';
+import Product from '../../Product';
 
 const Container = styled.div`
   display: flex;
@@ -20,12 +22,34 @@ const Container = styled.div`
   }
 `;
 
-export default function ProductPage() {
+export default function ProductPage({ product }: { product: Product }) {
+  console.log(product);
   return (
     <Container>
-      <ProductImage />
-      <InfoBox />
+      <ProductImage src={product.gallery[0].main} />
+      <InfoBox
+        name={product.name}
+        tags={product.tags}
+        rating={product.reviews.rating}
+        count={product.reviews.count}
+      />
       <AddToBox />
     </Container>
   );
 }
+
+export async function getStaticPaths() {
+  return {
+    paths: [{ params: { id: '1' } }],
+    fallback: false,
+  };
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const res = await fetch(`https://fe-assignment.vaimo.net/`).then((res) => res.json());
+  return {
+    props: {
+      product: res.product,
+    },
+  };
+};

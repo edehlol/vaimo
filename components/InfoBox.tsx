@@ -7,9 +7,13 @@ import MarchExpo from './MarchExpo';
 import Countdown from './Countdown';
 import Products from './Products';
 import Assurance from './Assurance';
+import device from '../breakpoints';
+import Product from '../Product';
 
 const Container = styled.div`
-  max-width: 526px;
+  @media ${device.desktop} {
+    max-width: 526px;
+  }
 `;
 
 const ProductName = styled.h1`
@@ -29,16 +33,28 @@ const Tag = styled.span`
   float: right;
 `;
 
-export default function InfoBox() {
+export default function InfoBox({
+  name,
+  tags,
+  rating,
+  count,
+}: {
+  name: Product['name'];
+  tags: Product['tags'];
+  rating: Product['reviews']['rating'];
+  count: Product['reviews']['count'];
+}) {
+  const renderTags = () => {
+    return tags.map((tag) => <Tag key={tag}>{tag}</Tag>);
+  };
   return (
     <Container>
       <BadgeList />
       <ProductName>
-        2021 hot selling GPS 5G quadcopter drone with camera remote control aircraft drone WiFi mini
-        drone camera
-        <Tag>Hot sale products</Tag>
+        {name}
+        {renderTags()}
       </ProductName>
-      <RatingsBox />
+      <RatingsBox rating={rating} count={count} />
       <PriceBox />
       <MarchExpo />
       <Countdown />

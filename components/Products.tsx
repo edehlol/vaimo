@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styled from 'styled-components';
+import { useState } from 'react';
 
 const ProductsContainer = styled.div`
   display: flex;
@@ -67,6 +68,7 @@ const Quantity = () => {
 };
 
 const Product = ({ name, price }: { name: string; price: string }) => {
+  const [quantity, setQuantity] = useState(0);
   return (
     <ProductContainer>
       <Name>{name}</Name>
