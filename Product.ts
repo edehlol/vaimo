@@ -24,6 +24,10 @@ export default interface Product {
     main: string;
   }[];
   shipping: {
+    lead_time: {
+      value: string;
+      info: string;
+    };
     method: {
       country: string;
       title: string;
@@ -34,10 +38,7 @@ export default interface Product {
       cost: Price;
     };
   };
-  lead_time: {
-    value: string;
-    info: string;
-  };
+
   props: {
     ready_to_ship: boolean;
     in_stock: boolean;

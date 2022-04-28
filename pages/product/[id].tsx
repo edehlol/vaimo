@@ -1,9 +1,11 @@
 import { GetStaticProps } from 'next';
 import styled from 'styled-components';
+import { useAppDispatch } from '../../app/hooks';
 import device from '../../breakpoints';
 import AddToBox from '../../components/AddToBox';
 import InfoBox from '../../components/InfoBox';
 import ProductImage from '../../components/ProductImage';
+import { setProduct } from '../../features/product/productSlice';
 import Product from '../../Product';
 
 const Container = styled.div`
@@ -23,16 +25,15 @@ const Container = styled.div`
 `;
 
 export default function ProductPage({ product }: { product: Product }) {
+  const dispatch = useAppDispatch();
+  dispatch(setProduct(product));
+
   console.log(product);
+
   return (
     <Container>
-      <ProductImage src={product.gallery[0].main} />
-      <InfoBox
-        name={product.name}
-        tags={product.tags}
-        rating={product.reviews.rating}
-        count={product.reviews.count}
-      />
+      <ProductImage />
+      <InfoBox />
       <AddToBox />
     </Container>
   );

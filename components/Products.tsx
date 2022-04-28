@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styled from 'styled-components';
-import { useState } from 'react';
-
+import { useAppSelector } from '../app/hooks';
+import { selectOptions } from '../features/product/productSlice';
 const ProductsContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -68,7 +68,6 @@ const Quantity = () => {
 };
 
 const Product = ({ name, price }: { name: string; price: string }) => {
-  const [quantity, setQuantity] = useState(0);
   return (
     <ProductContainer>
       <Name>{name}</Name>
@@ -79,11 +78,15 @@ const Product = ({ name, price }: { name: string; price: string }) => {
 };
 
 export default function Products() {
-  return (
-    <ProductsContainer>
-      <Product name="1080P" price="R 833.99" />
-      <Product name="4K" price="R 895.31" />
-      <Product name="Battery (accessories)" price="R 78.50" />
-    </ProductsContainer>
-  );
+  const options = useAppSelector(selectOptions);
+  const renderOptions = () => {
+    return options.map((option) => (
+      <Product
+        key={option.label}
+        name={option.label}
+        price={`${option.price.currency.symbol} ${option.price.value}`}
+      />
+    ));
+  };
+  return <ProductsContainer>{renderOptions()}</ProductsContainer>;
 }

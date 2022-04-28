@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import RatingsBox from './RatingsBox';
 import PriceBox from './PriceBox';
 import MarchExpo from './MarchExpo';
-import Countdown from './Countdown';
+import Discount from './Discount';
 import Products from './Products';
 import Assurance from './Assurance';
 import device from '../breakpoints';
-import Product from '../Product';
+import { useAppSelector } from '../app/hooks';
+import { selectName, selectTags } from '../features/product/productSlice';
 
 const Container = styled.div`
   @media ${device.desktop} {
@@ -33,20 +34,14 @@ const Tag = styled.span`
   float: right;
 `;
 
-export default function InfoBox({
-  name,
-  tags,
-  rating,
-  count,
-}: {
-  name: Product['name'];
-  tags: Product['tags'];
-  rating: Product['reviews']['rating'];
-  count: Product['reviews']['count'];
-}) {
+export default function InfoBox() {
+  const name = useAppSelector(selectName);
+  const tags = useAppSelector(selectTags);
+
   const renderTags = () => {
     return tags.map((tag) => <Tag key={tag}>{tag}</Tag>);
   };
+
   return (
     <Container>
       <BadgeList />
@@ -54,10 +49,10 @@ export default function InfoBox({
         {name}
         {renderTags()}
       </ProductName>
-      <RatingsBox rating={rating} count={count} />
+      <RatingsBox />
       <PriceBox />
       <MarchExpo />
-      <Countdown />
+      <Discount />
       <Products />
       <Assurance />
     </Container>

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import styled from 'styled-components';
-import Product from '../Product';
+import { useAppSelector } from '../app/hooks';
+import { selectCount, selectRating, selectTotalBuyers } from '../features/product/productSlice';
 import Text from './Text';
 
 const Container = styled.div`
@@ -13,22 +14,22 @@ const Container = styled.div`
 
 const Star = () => <Image src="/icons/star.png" width="14px" height="14px" alt="star rating" />;
 
-export default function RatingsBox({
-  rating,
-  count,
-}: {
-  rating: Product['reviews']['rating'];
-  count: Product['reviews']['count'];
-}) {
+export default function RatingsBox() {
+  const rating = useAppSelector(selectRating);
+  const count = useAppSelector(selectCount);
+  const totalBuyers = useAppSelector(selectTotalBuyers);
+
+  const renderStars = () => {
+    const stars = [];
+    for (let i = 0; i < Number(rating); i++) {
+      stars.push(<Star key={i} />);
+    }
+    return stars;
+  };
+
   return (
     <Container>
-      <div>
-        <Star />
-        <Star />
-        <Star />
-        <Star />
-        <Star />
-      </div>
+      <div>{renderStars()}</div>
 
       <Text size="small" color="orange">
         {rating}
@@ -37,7 +38,7 @@ export default function RatingsBox({
         {count} reviews
       </Text>
       <Text size="small" style={{ marginLeft: '24px' }}>
-        19 buyers
+        {totalBuyers} buyers
       </Text>
     </Container>
   );

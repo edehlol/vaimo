@@ -2,6 +2,13 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import Text from './Text';
 import device from '../breakpoints';
+import { useAppSelector } from '../app/hooks';
+import {
+  selectCurrency,
+  selectLeadTime,
+  selectShippingCost,
+  selectShippingTime,
+} from '../features/product/productSlice';
 
 const Container = styled.div`
   padding: 28px 26px;
@@ -51,27 +58,38 @@ const Button = styled.button<ButtonProps>`
 `;
 
 export default function AddToBox() {
+  const currency = useAppSelector(selectCurrency);
+  const shippingCost = useAppSelector(selectShippingCost);
+  const leadTime = useAppSelector(selectLeadTime);
+  const shippingTime = useAppSelector(selectShippingTime);
+
+  const formatTime = (str: string) => {
+    const [value, unit] = str.split(' ');
+    return (
+      <>
+        <b>{value}</b> {unit}
+      </>
+    );
+  };
   return (
     <Container>
       <Row>
         <Text color="gray">Ship to South Africa by Express UPS Sav…</Text>
         <Text size="large" style={{ whiteSpace: 'pre' }}>
-          <b>R 6,036.74</b>
+          <b>
+            {currency} {shippingCost}
+          </b>
         </Text>
       </Row>
 
       <DurationContainer>
         <Text color="gray" style={{ display: 'flex', columnGap: '13px', alignItems: 'center' }}>
-          <span>
-            Lead Time <b>10</b> days{' '}
-          </span>
+          <span>Lead Time {formatTime(leadTime)} </span>
 
           <Image src="/icons/info.png" width="15px" height="14px" alt="info" />
         </Text>
         <Text color="gray" style={{ display: 'flex', columnGap: '13px', alignItems: 'center' }}>
-          <span>
-            Shipping time <b>6-10</b> days{' '}
-          </span>
+          <span>Shipping time {formatTime(shippingTime)} </span>
 
           <Image src="/icons/info.png" width="15px" height="14px" alt="info" />
         </Text>

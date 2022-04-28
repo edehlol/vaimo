@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import styled from 'styled-components';
+import { useAppSelector } from '../app/hooks';
+import { selectDiscount, selectDiscountEndDate } from '../features/product/productSlice';
 import Text from './Text';
 
 const Container = styled.div`
@@ -10,17 +12,20 @@ const Container = styled.div`
   column-gap: 24px;
 `;
 
-export default function Countdown() {
+export default function Discount() {
+  const discount = useAppSelector(selectDiscount);
+  const endDate = useAppSelector(selectDiscountEndDate);
   return (
     <Container>
-      <Text color="orange">20% OFF</Text>
+      <Text color="orange">{discount} OFF</Text>
       <Text color="gray">Discount ends in</Text>
       <Text
         color="gray"
         style={{ display: 'flex', columnGap: '12px', alignItems: 'center', fontStyle: 'italic' }}
       >
         <Image src="/icons/clock.png" width="16px" height="16px" alt="clock" />
-        2d:01h:56m:49s
+        {/* 2d:01h:56m:49s */}
+        {endDate}
       </Text>
     </Container>
   );
