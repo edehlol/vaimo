@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import styled from 'styled-components';
 import { useAppSelector } from '../app/hooks';
-import { selectOptions } from '../features/product/productSlice';
+import { RootState } from '../app/store';
+import { selectOption, selectOptions } from '../features/product/productSlice';
+import { Option } from '../Product';
 const ProductsContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -16,11 +18,11 @@ const QuantityContainer = styled.div`
   height: 40px;
   border-radius: 2px;
 `;
-interface IconContainerProps {
+interface QuantityButtonProps {
   minus?: boolean;
   plus?: boolean;
 }
-const IconContainer = styled.div<IconContainerProps>`
+const QuantityButton = styled.div<QuantityButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,26 +55,42 @@ const Price = styled.span`
   width: 20%;
 `;
 
-const Quantity = () => {
+const Quantity = ({ optionId }: { optionId: Option['id'] }) => {
+  const option = useAppSelector((state: RootState) => selectOption(state, optionId));
+  console.log(option);
   return (
     <QuantityContainer>
-      <IconContainer minus>
+      <QuantityButton minus>
         <Image src="/icons/minus.png" width="14px" height="2px" alt="minus" />
-      </IconContainer>
+      </QuantityButton>
       <Input defaultValue={0} />
-      <IconContainer plus>
+      <QuantityButton plus>
         <Image src="/icons/plus.png" width="14px" height="14px" alt="minus" />
-      </IconContainer>
+      </QuantityButton>
     </QuantityContainer>
   );
 };
 
-const Product = ({ name, price }: { name: string; price: string }) => {
+const Product = ({
+  id,
+  name,
+  value,
+  currency,
+}: {
+  id: Option['id'];
+  name: Option['label'];
+  value: Option['price']['value'];
+  currency: Option['price']['currency']['symbol'];
+}) => {
   return (
     <ProductContainer>
       <Name>{name}</Name>
-      <Price>{price}</Price>
-      <Quantity />
+      <Price>
+        <>
+          {currency} {value}
+        </>
+      </Price>
+      <Quantity optionId={id} />
     </ProductContainer>
   );
 };
@@ -80,11 +98,13 @@ const Product = ({ name, price }: { name: string; price: string }) => {
 export default function Products() {
   const options = useAppSelector(selectOptions);
   const renderOptions = () => {
-    return options.map((option) => (
+    return options.map((option: Option) => (
       <Product
+        id={option.id}
         key={option.label}
         name={option.label}
-        price={`${option.price.currency.symbol} ${option.price.value}`}
+        value={option.price.value}
+        currency={option.price.currency.symbol}
       />
     ));
   };

@@ -1,3 +1,4 @@
+import { nanoid } from '@reduxjs/toolkit';
 import { GetStaticProps } from 'next';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../app/hooks';
@@ -47,10 +48,14 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch(`https://fe-assignment.vaimo.net/`).then((res) => res.json());
+  const { product } = await fetch(`https://fe-assignment.vaimo.net/`).then((res) => res.json());
+  const options = Object.keys(product.options).map((key) => {
+    return { ...product.options[key], id: nanoid(), quantity: 5 };
+  });
   return {
     props: {
-      product: res.product,
+      product: { ...product, options },
+      options,
     },
   };
 };

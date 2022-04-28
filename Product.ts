@@ -6,16 +6,17 @@ interface Price {
     format: string;
   };
 }
+export interface Option {
+  label: string;
+  price: Price;
+  old_price: Price;
+  quantity: number;
+  id: string;
+}
 export default interface Product {
   name: string;
   tags: string[];
-  options: {
-    [key: string]: {
-      label: string;
-      price: Price;
-      old_price: Price;
-    };
-  };
+  options: Option[];
   discount: {
     amount: string;
     end_date: string;
@@ -37,12 +38,11 @@ export default interface Product {
       };
       cost: Price;
     };
-  };
-
-  props: {
-    ready_to_ship: boolean;
-    in_stock: boolean;
-    fast_dispatch: boolean;
+    props: {
+      ready_to_ship: boolean;
+      in_stock: boolean;
+      fast_dispatch: boolean;
+    };
   };
 
   reviews: {

@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 import Image from 'next/image';
+import { useAppSelector } from '../app/hooks';
+import {
+  selectFastDispatch,
+  selectInStock,
+  selectReadyToShip,
+} from '../features/product/productSlice';
 
 const List = styled.div`
   display: inline-flex;
@@ -31,16 +37,16 @@ const BadgeIcon = ({ src }: { src: string }) => {
 };
 
 export default function BadgeList() {
+  const isReadyToShip = useAppSelector(selectReadyToShip);
+  const isInStock = useAppSelector(selectInStock);
+  const isFastDispatch = useAppSelector(selectFastDispatch);
   return (
     <List>
-      <Badge primary>Ready to Ship</Badge>
-      <Badge>
-        <BadgeIcon src="/icons/ok.png" /> In Stock
-      </Badge>
-      <Badge>
-        <BadgeIcon src="/icons/ok.png" />
-        Fast Dispatch
-      </Badge>
+      {isReadyToShip && <Badge primary>Ready to Ship</Badge>}
+
+      <Badge>{isInStock && <BadgeIcon src="/icons/ok.png" />} In Stock</Badge>
+
+      <Badge>{isFastDispatch && <BadgeIcon src="/icons/ok.png" />} Fast Dispatch</Badge>
     </List>
   );
 }
