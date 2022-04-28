@@ -5,11 +5,14 @@ import device from '../breakpoints';
 import { useAppSelector } from '../app/hooks';
 import {
   selectCurrency,
+  selectLeadInfo,
   selectLeadTime,
   selectShippingCost,
+  selectShippingInfo,
   selectShippingTime,
 } from '../features/product/productSlice';
 import Cart from './Cart';
+import { Popover } from '@headlessui/react';
 
 const Container = styled.div`
   padding: 28px 26px;
@@ -58,11 +61,38 @@ const Button = styled.button<ButtonProps>`
   color: ${(props) => (props.primary ? '#FFFFFF' : '#FF6600')};
 `;
 
+const PopoverButton = styled(Popover.Button)`
+  border: none;
+  background-color: white;
+`;
+const PopoverPanel = styled(Popover.Panel)`
+  z-index: 20;
+  position: absolute;
+  background-color: white;
+  width: 320px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
+  padding: 12px;
+  border-radius: 8px;
+`;
+
+const InfoPopover = ({ info }: { info: string }) => {
+  return (
+    <Popover style={{ position: 'relative' }}>
+      <PopoverButton>
+        <Image src="/icons/info.png" width="15px" height="14px" alt="info" />
+      </PopoverButton>
+      <PopoverPanel>{info}</PopoverPanel>
+    </Popover>
+  );
+};
+
 export default function AddToBox() {
   const currency = useAppSelector(selectCurrency);
   const shippingCost = useAppSelector(selectShippingCost);
   const leadTime = useAppSelector(selectLeadTime);
   const shippingTime = useAppSelector(selectShippingTime);
+  const leadInfo = useAppSelector(selectLeadInfo);
+  const shippingInfo = useAppSelector(selectShippingInfo);
 
   const formatTime = (str: string) => {
     const [value, unit] = str.split(' ');
@@ -79,7 +109,7 @@ export default function AddToBox() {
         <Text color="gray">Ship to South Africa by Express UPS Sav…</Text>
         <Text size="large" style={{ whiteSpace: 'pre' }}>
           <b>
-            {currency} {shippingCost}
+            {currency} {shippingCost.toFixed(2)}
           </b>
         </Text>
       </Row>
@@ -88,12 +118,12 @@ export default function AddToBox() {
         <Text color="gray" style={{ display: 'flex', columnGap: '13px', alignItems: 'center' }}>
           <span>Lead Time {formatTime(leadTime)} </span>
 
-          <Image src="/icons/info.png" width="15px" height="14px" alt="info" />
+          <InfoPopover info={leadInfo} />
         </Text>
         <Text color="gray" style={{ display: 'flex', columnGap: '13px', alignItems: 'center' }}>
           <span>Shipping time {formatTime(shippingTime)} </span>
 
-          <Image src="/icons/info.png" width="15px" height="14px" alt="info" />
+          <InfoPopover info={shippingInfo} />
         </Text>
       </DurationContainer>
       <ButtonsContainer>

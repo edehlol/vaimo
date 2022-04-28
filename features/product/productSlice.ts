@@ -107,6 +107,9 @@ export const selectShippingCost = (state: RootState) => state.product.shipping.m
 export const selectLeadTime = (state: RootState) => state.product.shipping.lead_time.value;
 export const selectShippingTime = (state: RootState) =>
   state.product.shipping.method.shipping_time.value;
+export const selectLeadInfo = (state: RootState) => state.product.shipping.lead_time.info;
+export const selectShippingInfo = (state: RootState) =>
+  state.product.shipping.method.shipping_time.info;
 
 export interface CartItem {
   label: Option['label'];
