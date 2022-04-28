@@ -50,7 +50,7 @@ export async function getStaticPaths() {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { product } = await fetch(`https://fe-assignment.vaimo.net/`).then((res) => res.json());
   const options = Object.keys(product.options).map((key) => {
-    return { ...product.options[key], id: nanoid(), quantity: 5 };
+    return { ...product.options[key], id: nanoid(), quantity: 0 };
   });
   return {
     props: {

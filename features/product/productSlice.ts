@@ -8,16 +8,39 @@ export const productSlice = createSlice({
   reducers: {
     setProduct: (state, action) => action.payload,
     addToQuantity: (state, action) => {
-      const { productId } = action.payload;
+      const option = state.options.find((option) => option.id === action.payload);
+      if (option) {
+        option.quantity++;
+      }
+    },
+    subtractFromQuantity: (state, action) => {
+      const option = state.options.find((option) => option.id === action.payload);
+      if (option && option.quantity > 0) {
+        option.quantity--;
+      }
+    },
+    setQuantity: (state, action) => {
+      const { optionId, quantity } = action.payload;
+      const option = state.options.find((option) => option.id === optionId);
+      if (option) {
+        option.quantity = quantity;
+      }
+    },
+    validateQuantity: (state, action) => {
+      const { optionId, quantity } = action.payload;
+      const option = state.options.find((option) => option.id === optionId);
+      if (option) {
+        option.quantity < 0 ? (option.quantity = 0) : option.quantity;
+      }
     },
   },
 });
 
-export const { setProduct } = productSlice.actions;
+export const { setProduct, addToQuantity, subtractFromQuantity, setQuantity, validateQuantity } =
+  productSlice.actions;
 
-export const selectOption = (state: RootState, productId: Option['id']) => {
-  const options = Object.keys(state.product.options);
-  return state.product.options;
+export const selectQuantity = (state: RootState, productId: Option['id']) => {
+  return state.product.options.find((option) => option.id === productId)?.quantity;
   // const id = options.find((key: string) => state.product.options[key].id === productId);
   // return state.product.options[id];
 };
@@ -84,5 +107,26 @@ export const selectShippingCost = (state: RootState) => state.product.shipping.m
 export const selectLeadTime = (state: RootState) => state.product.shipping.lead_time.value;
 export const selectShippingTime = (state: RootState) =>
   state.product.shipping.method.shipping_time.value;
+
+export interface CartItem {
+  label: Option['label'];
+  productId: Option['id'];
+  quantity: Option['quantity'];
+  price: Option['price']['value'];
+}
+export const selectCartItems = (state: RootState) => {
+  const cartItems: CartItem[] = [];
+  state.product.options.forEach((option) => {
+    if (option.quantity > 0) {
+      cartItems.push({
+        label: option.label,
+        productId: option.id,
+        quantity: option.quantity,
+        price: option.price.value,
+      });
+    }
+  });
+  return cartItems;
+};
 
 export default productSlice.reducer;

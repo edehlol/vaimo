@@ -9,6 +9,7 @@ import {
   selectShippingCost,
   selectShippingTime,
 } from '../features/product/productSlice';
+import Cart from './Cart';
 
 const Container = styled.div`
   padding: 28px 26px;
@@ -73,6 +74,7 @@ export default function AddToBox() {
   };
   return (
     <Container>
+      <Cart />
       <Row>
         <Text color="gray">Ship to South Africa by Express UPS Sav…</Text>
         <Text size="large" style={{ whiteSpace: 'pre' }}>

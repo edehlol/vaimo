@@ -43,14 +43,14 @@ export default function PriceBox() {
     <Container>
       <PriceContainer>
         <Text color="orange" size="large" weight="bold">
-          {currency} {lowestPriceOption} - {currency} {highestPriceOption}
+          {currency} {lowestPriceOption.toFixed(2)} - {currency} {highestPriceOption.toFixed(2)}
         </Text>
         <Text color="gray">/ Option</Text>
         <Divider>|</Divider>
         <Text color="gray">(Min.Order)</Text>
       </PriceContainer>
       <Text color="gray" style={{ textDecoration: 'line-through' }}>
-        {currency} {oldLowestPriceOption} - {currency} {oldHighestPriceOption}
+        {currency} {oldLowestPriceOption.toFixed(2)} - {currency} {oldHighestPriceOption.toFixed(2)}
       </Text>
     </Container>
   );
