@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useState } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { RootState } from '../app/store';
@@ -68,16 +67,8 @@ const Quantity = ({
   step?: number;
 }) => {
   const quantity = useAppSelector((state: RootState) => selectQuantity(state, optionId));
-  const [input, setInput] = useState(quantity || 0);
   const dispatch = useAppDispatch();
 
-  const validateInput = () => {
-    console.log('test');
-    // if (input < 0 || input === null) {
-    //   dispatch(setQuantity({ optionId, quantity: 0 }));
-    // }
-    dispatch(validateQuantity({ optionId, quantity }));
-  };
   return (
     <QuantityContainer>
       <QuantityButton
@@ -89,7 +80,7 @@ const Quantity = ({
       </QuantityButton>
       <Input
         value={quantity}
-        onBlur={validateInput}
+        onBlur={() => dispatch(validateQuantity({ optionId, quantity }))}
         onChange={(e) => dispatch(setQuantity({ optionId, quantity: e.target.value }))}
         type="number"
         min={min}

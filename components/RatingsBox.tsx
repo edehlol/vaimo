@@ -30,7 +30,6 @@ export default function RatingsBox() {
   return (
     <Container>
       <div>{renderStars()}</div>
-
       <Text size="small" color="orange">
         {rating}
       </Text>

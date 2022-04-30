@@ -32,7 +32,7 @@ export const productSlice = createSlice({
       if (option) {
         option.quantity < 0
           ? (option.quantity = 0)
-          : option.quantity === null || option.quantity === undefined
+          : option.quantity == null || option.quantity == NaN
           ? (option.quantity = 0)
           : quantity;
       }
@@ -45,8 +45,6 @@ export const { setProduct, addToQuantity, subtractFromQuantity, setQuantity, val
 
 export const selectQuantity = (state: RootState, productId: Option['id']) => {
   return state.product.options.find((option) => option.id === productId)?.quantity;
-  // const id = options.find((key: string) => state.product.options[key].id === productId);
-  // return state.product.options[id];
 };
 
 export const selectProductImage = (state: RootState) => state.product.gallery[0].main;
@@ -64,34 +62,18 @@ export const selectTotalBuyers = (state: RootState) => state.product.reviews.tot
 
 export const selectCurrency = (state: RootState) => state.product.options[0].price.currency.symbol;
 export const selectLowestPrice = (state: RootState) => {
-  // const options = Object.keys(state.product.options);
-  // const prices = options.map((option) => {
-  //   return state.product.options[option].price.value;
-  // });
   const prices = state.product.options.map((option) => option.price.value);
   return Math.min(...prices);
 };
 export const selectHighestPrice = (state: RootState) => {
-  // const options = Object.keys(state.product.options);
-  // const prices = options.map((option) => {
-  //   return state.product.options[option].price.value;
-  // });
   const prices = state.product.options.map((option) => option.price.value);
   return Math.max(...prices);
 };
 export const selectOldLowestPrice = (state: RootState) => {
-  // const options = Object.keys(state.product.options);
-  // const prices = options.map((option) => {
-  //   return state.product.options[option].old_price.value;
-  // });
   const prices = state.product.options.map((option) => option.old_price.value);
   return Math.min(...prices);
 };
 export const selectOldHighestPrice = (state: RootState) => {
-  // const options = Object.keys(state.product.options);
-  // const prices = options.map((option) => {
-  //   return state.product.options[option].old_price.value;
-  // });
   const prices = state.product.options.map((option) => option.old_price.value);
   return Math.max(...prices);
 };
@@ -100,10 +82,6 @@ export const selectDiscount = (state: RootState) => state.product.discount.amoun
 export const selectDiscountEndDate = (state: RootState) => state.product.discount.end_date;
 
 export const selectOptions = (state: RootState) => {
-  // const options = Object.keys(state.product.options);
-  // return options.map((option) => {
-  //   return state.product.options[option];
-  // });
   return state.product.options;
 };
 
