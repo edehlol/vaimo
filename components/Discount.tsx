@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useAppSelector } from '../app/hooks';
 import { selectDiscount, selectDiscountEndDate } from '../features/product/productSlice';
 import Text from './Text';
+import Countdown from 'react-countdown';
 
 const Container = styled.div`
   display: flex;
@@ -15,6 +16,24 @@ const Container = styled.div`
 export default function Discount() {
   const discount = useAppSelector(selectDiscount);
   const endDate = useAppSelector(selectDiscountEndDate);
+
+  const renderer = ({
+    days,
+    hours,
+    minutes,
+    seconds,
+  }: {
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  }) => {
+    return (
+      <span>
+        {days}d:{hours}h:{minutes}m:{seconds}s
+      </span>
+    );
+  };
   return (
     <Container>
       <Text color="orange">{discount} OFF</Text>
@@ -24,8 +43,11 @@ export default function Discount() {
         style={{ display: 'flex', columnGap: '12px', alignItems: 'center', fontStyle: 'italic' }}
       >
         <Image src="/icons/clock.png" width="16px" height="16px" alt="clock" />
-        {/* 2d:01h:56m:49s */}
-        {endDate}
+        <Countdown
+          date={Date.now() + (Date.parse(endDate) - Date.now())}
+          daysInHours={false}
+          renderer={renderer}
+        />
       </Text>
     </Container>
   );
