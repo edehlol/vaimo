@@ -1,5 +1,5 @@
 import { nanoid } from '@reduxjs/toolkit';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps, GetStaticProps } from 'next';
 import Head from 'next/head';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../app/hooks';
@@ -46,14 +46,7 @@ export default function ProductPage({ product }: { product: Product }) {
   );
 }
 
-export async function getStaticPaths() {
-  return {
-    paths: [{ params: { id: '1' } }],
-    fallback: false,
-  };
-}
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { product } = await fetch(`https://fe-assignment.vaimo.net/`).then((res) => res.json());
   const options = Object.keys(product.options).map((key) => {
     return { ...product.options[key], id: nanoid(), quantity: 0 };
