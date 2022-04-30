@@ -10,6 +10,10 @@ const Container = styled.div`
   justify-content: space-between;
   font-size: 14px;
   padding-right: 16px;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
+  }
 `;
 
 const DesktopText = styled.div`

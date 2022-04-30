@@ -30,7 +30,11 @@ export const productSlice = createSlice({
       const { optionId, quantity } = action.payload;
       const option = state.options.find((option) => option.id === optionId);
       if (option) {
-        option.quantity < 0 ? (option.quantity = 0) : option.quantity;
+        option.quantity < 0
+          ? (option.quantity = 0)
+          : option.quantity === null || option.quantity === undefined
+          ? (option.quantity = 0)
+          : quantity;
       }
     },
   },

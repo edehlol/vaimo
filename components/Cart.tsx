@@ -77,10 +77,8 @@ export default function Cart() {
           <ProductList>
             {renderCartItems()}
             <TotalContainer>
-              <Text weight="semibold" size="large">
-                Grand Total:
-              </Text>
-              <Text size="large" weight="semibold">
+              <Text weight="semibold">Grand Total:</Text>
+              <Text weight="semibold">
                 {currency} {totalCost()}
               </Text>
             </TotalContainer>
