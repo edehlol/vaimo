@@ -1,5 +1,6 @@
 import { nanoid } from '@reduxjs/toolkit';
 import { GetStaticProps } from 'next';
+import Head from 'next/head';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../app/hooks';
 import device from '../../breakpoints';
@@ -32,11 +33,16 @@ export default function ProductPage({ product }: { product: Product }) {
   console.log(product);
 
   return (
-    <Container>
-      <ProductImage />
-      <InfoBox />
-      <AddToBox />
-    </Container>
+    <>
+      <Head>
+        <title>{product.name}</title>
+      </Head>
+      <Container>
+        <ProductImage />
+        <InfoBox />
+        <AddToBox />
+      </Container>
+    </>
   );
 }
 

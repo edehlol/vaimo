@@ -78,6 +78,9 @@ const Button = styled.button<ButtonProps>`
 const PopoverButton = styled(Popover.Button)<any>`
   border: none;
   background-color: white;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const PopoverPanel = styled(Popover.Panel)<any>`
   z-index: 20;

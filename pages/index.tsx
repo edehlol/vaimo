@@ -1,9 +1,24 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
-  return <div>home</div>;
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+      }}
+    >
+      <div style={{ textAlign: 'center' }}>
+        <h1>No, not here.</h1>
+        <Link href="/product/1">
+          <a style={{ textDecoration: 'underline', color: '#1565C0' }}>Here is the page</a>
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 export default Home;

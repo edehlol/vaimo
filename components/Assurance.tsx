@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import styled from 'styled-components';
 import Text from './Text';
 
@@ -29,6 +30,14 @@ const LinksContainer = styled.div`
   column-gap: 24px;
 `;
 
+const StyledLink = styled.a`
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: #999999;
+  }
+`;
+
 export default function Assurance() {
   return (
     <Container>
@@ -55,12 +64,21 @@ export default function Assurance() {
       </PaymentContainer>
 
       <LinksContainer>
-        <Text size="small" color="gray">
-          Alibaba.com Logistics
-        </Text>
-        <Text size="small" color="gray">
-          Inspection Solutions
-        </Text>
+        <Link href="https://ship.alibaba.com/" passHref>
+          <StyledLink>
+            <Text size="small" color="gray">
+              Alibaba.com Logistics
+            </Text>
+          </StyledLink>
+        </Link>
+
+        <Link href="https://www.inspectsolutions.com/" passHref>
+          <StyledLink>
+            <Text size="small" color="gray">
+              Inspection Solutions
+            </Text>
+          </StyledLink>
+        </Link>
       </LinksContainer>
     </Container>
   );

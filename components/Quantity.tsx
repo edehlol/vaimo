@@ -18,6 +18,9 @@ const QuantityContainer = styled.div`
   border: 1px solid #e6e7eb;
   height: 40px;
   border-radius: 2px;
+  &:hover {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
+  }
 `;
 
 interface QuantityButtonProps {
