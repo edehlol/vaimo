@@ -69,6 +69,12 @@ a `breakpoints.ts` file is used to define the breakpoints for the responsive des
 
 ## Additional Notes
 
+Optional Features:
+[x] - API returns info for the shipping time and lead time. Add a tooltip on hover that displays it.
+[x] - Have the discount timer count down to the discount end date provided by the API.
+[x] - Have the QTY rocker be a shareable component that can be configured to have different min
+value, max value, and step increment value.
+
 Currency selections happens on the assumption that the currency for all options and shipping cost is the same, thus:
 
 ```js
